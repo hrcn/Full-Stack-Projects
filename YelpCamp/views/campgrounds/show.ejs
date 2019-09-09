@@ -15,16 +15,23 @@
                 <image class="img-responsive" src="<%=campground.image%>"></image>
                 <div class="caption-full">
                     <h4 class="pull-right">$9/night</h4>
-                    <h4><a><%=campgroud.name%></a></h4>
-                    <p><%=campgroud.description%></p>
+                    <h4><a><%=campground.name%></a></h4>
+                    <p><%=campground.description%></p>
+                    <p>
+                        <em>Submitted by <%=campground.author.username%></em>
+                    </p>
+                    <a class="btn btn-warning" href="/campgrounds/<%=campground._id%>/edit">Edit</a>
+                    <form id="delete-form" action="/campgrounds/<%=campground._id%>?_method=DELETE" method="POST">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
                 </div>
             </div>
             <div class="well">
                 <div class="text-right">
-                    <a class="btn btn-success" href="/campgrouds/<%=campgroud._id%>/comments/new">Add New Comment</a>
+                    <a class="btn btn-success" href="/campgrounds/<%=campground._id%>/comments/new">Add New Comment</a>
                 </div>
                 <hr>
-                <% campgroud.comments.forEach(function(comments)) {  %>
+                <% campground.comments.forEach(function(comments)) {  %>
                     <div class="row">
                         <div class="col-md-12">
                             <%= comment.author.username %>
@@ -40,10 +47,10 @@
     </div>
 </div>
 
-<p><%= campgroud.description %></p>
+<p><%= campground.description %></p>
 
 <p>
-    <a class="btn btn-success" href="/campgrouds/<%=campgroud._id%>/comments/new">Add New Comment</a>
+    <a class="btn btn-success" href="/campgrounds/<%=campground._id%>/comments/new">Add New Comment</a>
 </p>
 
 <% include ../partials/footer %>
