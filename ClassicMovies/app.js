@@ -15,7 +15,9 @@ var commentRoutes    = require("./routes/comments"),
     movieRoutes      = require("./routes/movies"),
     indexRoutes      = require("./routes/index");
 
-mongoose.connect("mongodb://localhost/old_movies", {useNewUrlParser:true});
+var url = process.env.DATABASEURL || "mongodb://localhost/old_movies";
+mongoose.connect(url);
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
