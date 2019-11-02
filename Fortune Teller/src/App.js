@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 
 import Home from './pages/Home';
 import About from './pages/About';
+import Result from './pages/Result';
 
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/about" component={About} />
+                <Route exact path="/result" component={Result} />
               </Switch>
             </div>
         </BrowserRouter>
