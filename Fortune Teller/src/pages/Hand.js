@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import HandForm from '../components/HandFrom';
 
 class Hand extends Component {
     render() {
         return (
             <div>
-                <h1>HAND IMAGE PREDICTION</h1>
+                <HandForm />
             </div>
         )
     }

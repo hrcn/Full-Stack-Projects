@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Form from '../components/Form';
+import FaceForm from '../components/FaceForm';
 
 class Face extends Component {
     render() {
         return (
             <div>
-                <Form />
+                <FaceForm />
             </div>
         )
     }
