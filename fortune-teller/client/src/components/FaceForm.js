@@ -65,6 +65,14 @@ class FaceForm extends Component {
         }
     }
 
+    // componentDidMount() {
+    //     fetch('/api/customers')
+    //         .then(res => res.json())
+    //         .then(customers => this.setState({customers}, 
+    //                 () => console.log("customers fetched...",
+    //                 customers)))
+    // }
+
     handleSubmit = (event) => {
         alert('Form Submitted!');
 
