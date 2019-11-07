@@ -10,6 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import { DropzoneArea } from 'material-ui-dropzone'
+import { response } from 'express';
 
 const styles = {
     form: {
@@ -59,11 +60,33 @@ class Form extends Component {
             firstName: '',
             lastName: '',
             gender: '',
+            age: 18,
             faceImage: [],
             loading: false,
             errors: {}
         }
     }
+
+    componentDidMount() {
+        this.getUserInfo
+    }
+
+    // getUserInfo = () => {
+    //     fetch('http://localhost:4000/user')
+    //         .then(response => response.json())
+    //         .then(({data}) => {
+    //             console.log(data)
+    //         })
+    //         .catch(err => console.error(err))
+    // }
+
+    addUser = () => {
+        const { user } = this.state;
+        fetch('http://localhost:4000/user/add?firstName=${user.name}&lastName=${user.lastName}')
+            .then(this.getUserInfo)
+            .catch(err => console.error(err))
+    }
+
 
     handleSubmit = (event) => {
         alert('Form Submitted!');
