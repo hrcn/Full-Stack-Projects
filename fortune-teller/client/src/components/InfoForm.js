@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
-// import axios from 'axios';
 
 // Material UI
 import Grid from '@material-ui/core/Grid';
@@ -9,8 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
-import { DropzoneArea } from 'material-ui-dropzone'
-import { response } from 'express';
 
 const styles = {
     form: {
@@ -25,20 +22,12 @@ const styles = {
         marginTop: '5px',
         width: 300
     },
-    selectField: {
-        marginTop: '20px',
-        width: 300
-    },
     button: {
         marginTop: '20px',
         width: 300
     },
     input: {
         marginTop: '20px',
-    },
-    dropZone: {
-        marginTop: '50px',
-        width: 450
     }
 }
 
@@ -60,33 +49,11 @@ class Form extends Component {
             firstName: '',
             lastName: '',
             gender: '',
-            age: 18,
-            faceImage: [],
+            age: '',
             loading: false,
             errors: {}
         }
     }
-
-    componentDidMount() {
-        this.getUserInfo
-    }
-
-    // getUserInfo = () => {
-    //     fetch('http://localhost:4000/user')
-    //         .then(response => response.json())
-    //         .then(({data}) => {
-    //             console.log(data)
-    //         })
-    //         .catch(err => console.error(err))
-    // }
-
-    addUser = () => {
-        const { user } = this.state;
-        fetch('http://localhost:4000/user/add?firstName=${user.name}&lastName=${user.lastName}')
-            .then(this.getUserInfo)
-            .catch(err => console.error(err))
-    }
-
 
     handleSubmit = (event) => {
         alert('Form Submitted!');
@@ -98,12 +65,6 @@ class Form extends Component {
     handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value
-        });
-    }
-
-    handleImageUpload = (files) => {
-        this.setState({
-            faceImage: files
         });
     }
 
@@ -173,17 +134,7 @@ class Form extends Component {
                             fullWidth
                             margin="normal"
                         />
-
-                        <DropzoneArea
-                            dropzoneClass={classes.dropZone}
-                            onChange={this.handleImageUpload}
-                            dropzoneText='Upload Face Image (.jpg Format) Here'
-                            acceptedFiles={['image/jpeg']}
-                            filesLimit={1}
-                        />
-
-                        <p>* The image should be clear and it should be forward facing.</p>
-
+                        
                         <Button
                             type="submit" 
                             variant="contained" 

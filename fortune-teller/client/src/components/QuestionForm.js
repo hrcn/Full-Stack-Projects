@@ -1,39 +1,34 @@
 import React, { Component } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
-// import axios from 'axios';
 
 // Material UI
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import { DropzoneArea } from 'material-ui-dropzone'
+import TextField from '@material-ui/core/TextField';
 
 const styles = {
     form: {
-        textAlign: 'center',
-        color: ''
+        textAlign: 'center'
     },
     pageTitle: {
-        margin: 'auto',
+        marginTop: 'auto',
     },
     selectField: {
         marginTop: '20px',
-        width: 300
+        width: 500
     },
-    dropZone: {
-        marginTop: '20px',
-        width: 450
+    button: {
+        marginTop: '20px'
     }
 }
 
-class FaceForm extends Component {
+class QuestionForm extends Component {
     constructor() {
         super();
         this.state = {
-            handImage: [],
-            loading: false,
-            errors: {}
+            userQuestion: []
         }
     }
 
@@ -50,12 +45,6 @@ class FaceForm extends Component {
         });
     }
 
-    handleImageUpload = (files) => {
-        this.setState({
-            faceImage: files
-        });
-    }
-
     render() {
 
         const { classes } = this.props;
@@ -65,19 +54,18 @@ class FaceForm extends Component {
                 <Grid item sm/>
                 <Grid item sm>
                     <Typography variant="h5" className={classes.pageTitle}>
-                        Palm Prediction
+                        Ask a question here!
                     </Typography>
                     <form noValidate className={classes.container} onSubmit={this.handleSubmit} autoComplete="off">
-                        <DropzoneArea
-                            dropzoneClass={classes.dropZone}
-                            onChange={this.handleImageUpload}
-                            dropzoneText='Upload Palm Image (.jpg Format) Here'
-                            acceptedFiles={['image/jpeg']}
-                            filesLimit={1}
+                    
+                        <TextField
+                            id="outlined-multiline-static"
+                            multiline
+                            rows="4"
+                            margin="normal"
+                            variant="outlined"
+                            fullWidth
                         />
-
-                        <p>* The image should be clear.</p>
-
                         <Button
                             type="submit" 
                             variant="contained" 
@@ -94,8 +82,8 @@ class FaceForm extends Component {
     }
 }
 
-FaceForm.propTypes = {
+QuestionForm.propTypes = {
     classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(FaceForm);
+export default withStyles(styles)(QuestionForm);
