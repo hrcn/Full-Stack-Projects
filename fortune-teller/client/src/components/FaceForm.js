@@ -34,9 +34,6 @@ class Form extends Component {
 
     handleSubmit = (event) => {
         alert('Form Submitted!');
-
-        // to do backend
-        
     }
 
     handleChange = (event) => {
@@ -46,9 +43,7 @@ class Form extends Component {
     }
 
     handleImageUpload = (files) => {
-        this.setState({
-            faceImage: files
-        });
+        this.setState({faceImage: files});
     }
 
     render() {

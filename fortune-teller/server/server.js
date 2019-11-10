@@ -1,18 +1,33 @@
 const mysql = require('mysql');
 const express = require('express');
+const bodyParser = require('body-parser');
 const cors = require('cors');
+const config = require('./config');
 
 let app = express();
-app.use(cors());
 
-const config = {
-    host: 'localhost',
-    user: 'root',
-    password: 'info6210popeyes',
-    database: 'prediction'
-}
+app.use(cors());
+ 
+// to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({ extended: false }));
+// to support URL-encoded bodies
+app.use(bodyParser.json());
 
 const connection = mysql.createConnection(config);
+
+app.get('/', (req, res) => {
+    res.send('home page')
+});
+
+let INSERT_NEW_QUESTION_QUERY = 'INSERT INTO questionnaire SET ?';
+
+app.post('/api/newquestion', (req, res) => {
+    let data = req.body.question;
+    connection.query(INSERT_NEW_QUESTION_QUERY, data, (error, results) => {
+           if (error) throw error;
+           res.end(JSON.stringify(results));
+         });
+});
 
 connection.connect((err) => {
     if(err) {
@@ -22,34 +37,5 @@ connection.connect((err) => {
     }
 });
 
-const SELECT_ALL = "SELECT * FROM test";
-
-app.get('/', (req, res) => {
-    res.send('go to /products to see all the products')
-});
-
-app.get('/products', (req, res) => {
-    connection.query(SELECT_ALL, (err, results) => {
-        if(err) {
-            return console.error(err.message);
-        } else {
-            return res.json({
-                data: results
-            })
-        }
-    });
-})
-
-app.get('/products/add', (req, res) => {
-    const { name, price } = req.query;
-    const INSERT_PRODUCT = 'INSERT INTO test (name, price) VALUES ("${name}", ${price})';
-    connection.query(INSERT_PRODUCT, (err, results) => {
-        if(err) {
-            return res.send(err)
-        } else {
-            return res.send('successfully added product')
-        }
-    })
-})
-
-app.listen(4000, () => console.log('Server started and listening on port 4000...'));
+const port = 4000;
+app.listen(port, () => console.log('Server started and listening on ' + port));

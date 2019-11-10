@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 // Material UI
 import Grid from '@material-ui/core/Grid';
@@ -28,16 +29,32 @@ class QuestionForm extends Component {
     constructor() {
         super();
         this.state = {
-            userQuestion: []
+            question: ''
         }
     }
 
     handleSubmit = (event) => {
-        alert('Form Submitted!');
+        alert('Form Submitted!')
 
-        // to do backend
-        
+        event.preventDefault();
+        console.log(this.state);
+
+        axios.post('http://localhost:4000/api/newquestion', this.state)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
+
+    // componentDidMount() {
+    //     axios.get(`http://localhost:4000/api/newquestion`)
+    //       .then(res => {
+    //         const userQuestion = res.data;
+    //         this.setState({ userQuestion });
+    //       })
+    //   }  
 
     handleChange = (event) => {
         this.setState({
@@ -57,9 +74,10 @@ class QuestionForm extends Component {
                         Ask a question here!
                     </Typography>
                     <form noValidate className={classes.container} onSubmit={this.handleSubmit} autoComplete="off">
-                    
                         <TextField
                             id="outlined-multiline-static"
+                            name="question"
+                            onChange={this.handleChange}
                             multiline
                             rows="4"
                             margin="normal"
