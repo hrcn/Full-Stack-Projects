@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
+// Page Styling
 const styles = {
     form: {
         textAlign: 'center'
@@ -39,7 +40,16 @@ class QuestionForm extends Component {
         event.preventDefault();
         console.log(this.state);
 
+        // post data to express server
         axios.post('http://localhost:4000/api/newquestion', this.state)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
+        axios.post('http://localhost:5000/api/newquestion', this.state)
             .then(response => {
                 console.log(response)
             })
