@@ -24,9 +24,9 @@ let INSERT_NEW_QUESTION_QUERY = 'INSERT INTO questionnaire SET ?';
 app.post('/api/newquestion', (req, res) => {
     let data = req.body;
     connection.query(INSERT_NEW_QUESTION_QUERY, data, (error, results) => {
-           if (error) throw error;
-           res.end(JSON.stringify(results));
-         });
+        if (error) throw error;
+        res.end(JSON.stringify(results));
+    });
 });
 
 connection.connect((err) => {

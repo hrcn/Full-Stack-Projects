@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
 // Material UI
+import withStyles from '@material-ui/core/styles/withStyles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -42,20 +42,21 @@ class QuestionForm extends Component {
 
         // post data to express server
         axios.post('http://localhost:4000/api/newquestion', this.state)
-            .then(response => {
-                console.log(response)
-            })
-            .catch(error => {
-                console.log(error)
-            })
+        .then(response => {
+            console.log(response)
+        })
+        .catch(error => {
+            console.log(error)
+        })
 
+        // post data to flask server
         axios.post('http://localhost:5000/api/newquestion', this.state)
-            .then(response => {
-                console.log(response)
-            })
-            .catch(error => {
-                console.log(error)
-            })
+        .then(response => {
+            console.log(response)
+        })
+        .catch(error => {
+            console.log(error)
+        })
     }
 
     // componentDidMount() {
@@ -73,7 +74,6 @@ class QuestionForm extends Component {
     }
 
     render() {
-
         const { classes } = this.props;
 
         return (

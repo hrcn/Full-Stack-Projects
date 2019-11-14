@@ -10,6 +10,7 @@ import Result from './pages/Result';
 import Face from './pages/Face';
 import Hand from './pages/Hand';
 import Question from './pages/Question';
+import QuestionResult from './pages/QuestionResult';
 
 class App extends Component {
   render() {
@@ -25,6 +26,7 @@ class App extends Component {
                 <Route exact path="/question" component={Question} />
                 <Route exact path="/about" component={About} />
                 <Route exact path="/result" component={Result} />
+                <Route exact path="/questionresult" component={QuestionResult} />
               </Switch>
             </div>
         </BrowserRouter>
