@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
-// import axios from 'axios';
+import axios from 'axios';
 
 // Material UI
 import Grid from '@material-ui/core/Grid';
@@ -23,27 +23,39 @@ const styles = {
 }
 
 class Form extends Component {
-    constructor() {
+    constructor(){
         super();
         this.state = {
-            faceImage: [],
-            loading: false,
-            errors: {}
-        }
-    }
+          faceImage: null
+        };
+      }
 
     handleSubmit = (event) => {
-        alert('Form Submitted!');
-    }
+        event.preventDefault();
+        console.log(this.state);
 
-    handleChange = (event) => {
-        this.setState({
-            [event.target.name]: event.target.value
-        });
+        const fd = new FormData();
+        fd.append('faceImage', this.state.faceImage);
+
+        const contentType = {
+            headers: { "content-type": "multipart/form-data" }
+        }
+
+        // post data to express server
+        axios.post('http://localhost:4000/api/newface', fd, contentType)
+        .then(response => {
+            console.log(response)
+        })
+        .catch(error => {
+            console.log(error)
+        })
     }
 
     handleImageUpload = (files) => {
-        this.setState({faceImage: files});
+        this.setState({
+            faceImage: files[0]
+        });
+        console.log(files[0]);
     }
 
     render() {
@@ -57,10 +69,16 @@ class Form extends Component {
                     <Typography variant="h5" className={classes.pageTitle}>
                         Face Prediction
                     </Typography>
-                    <form noValidate className={classes.container} onSubmit={this.handleSubmit} autoComplete="off">
+                    <form 
+                        noValidate 
+                        className={classes.container} 
+                        onSubmit={this.handleSubmit} 
+                        autoComplete="off"
+                        encType="multipart/form-data">
+
                         <DropzoneArea
                             dropzoneClass={classes.dropZone}
-                            onChange={this.handleImageUpload}
+                            onChange={this.handleImageUpload.bind(this)}
                             dropzoneText='Upload Face Image (.jpg Format) Here'
                             acceptedFiles={['image/jpeg']}
                             filesLimit={1}

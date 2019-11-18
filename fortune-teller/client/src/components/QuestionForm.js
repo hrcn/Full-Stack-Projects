@@ -59,14 +59,6 @@ class QuestionForm extends Component {
         })
     }
 
-    // componentDidMount() {
-    //     axios.get(`http://localhost:4000/api/newquestion`)
-    //       .then(res => {
-    //         const userQuestion = res.data;
-    //         this.setState({ userQuestion });
-    //       })
-    //   }  
-
     handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value
