@@ -42,13 +42,13 @@ class QuestionForm extends Component {
         console.log(this.state);
 
         // post data to express
-        axios.post('http://localhost:4000/api/newquestion', this.state)
-        .then(response => {
-            console.log(response)
-        })
-        .catch(error => {
-            console.log(error)
-        })
+        // axios.post('http://localhost:4000/api/newquestion', this.state)
+        // .then(response => {
+        //     console.log(response)
+        // })
+        // .catch(error => {
+        //     console.log(error)
+        // })
 
         // post data to flask
         axios.post('http://localhost:5000/api/newquestion', this.state)

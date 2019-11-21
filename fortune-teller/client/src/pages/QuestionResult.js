@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-// Material UI
-import Container from '@material-ui/core/Container';
-
 class QuestionResult extends Component {
     constructor() {
         super();
@@ -13,8 +10,13 @@ class QuestionResult extends Component {
     }
 
     componentDidMount() {
-        axios.post('http://localhost:5000/api/questionresult')
+        const config = {
+            headers: {'Access-Control-Allow-Origin': '*'}
+        };
+
+        axios.post('http://localhost:5000/api/newquestion', config)
         .then(response => {
+            console.log(response)
             this.setState({questionResult: response.data})
         })
         .catch(error => {
@@ -23,11 +25,11 @@ class QuestionResult extends Component {
     }
 
     render() {
+        const {questionResult} = this.state
+
         return (
             <div>
-                <Container>
-                    <h1>{this.state.questionResult}</h1>
-                </Container>
+                <h1>{questionResult}</h1>
             </div>
         )
     }
