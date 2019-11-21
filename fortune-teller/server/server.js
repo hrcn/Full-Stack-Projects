@@ -38,10 +38,6 @@ app.post('/api/newface', upload.single('faceImage'), (req, res) => {
             res.end(JSON.stringify(results));
         })
     })
-    // connection.query(INSERT_NEW_FACE_QUERY, faceImage, (error, results) => {
-    //     if (error) throw error;
-    //     res.end(JSON.stringify(results));
-    // });
 });
 
 connection.connect((err) => {

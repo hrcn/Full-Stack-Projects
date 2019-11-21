@@ -6,7 +6,6 @@ import Navbar from './components/Navbar';
 
 import Home from './pages/Home';
 import About from './pages/About';
-import Result from './pages/Result';
 import Face from './pages/Face';
 import Hand from './pages/Hand';
 import Question from './pages/Question';
@@ -25,7 +24,6 @@ class App extends Component {
                 <Route exact path="/hand" component={Hand} />
                 <Route exact path="/question" component={Question} />
                 <Route exact path="/about" component={About} />
-                <Route exact path="/result" component={Result} />
                 <Route exact path="/questionresult" component={QuestionResult} />
               </Switch>
             </div>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
@@ -40,7 +41,7 @@ class QuestionForm extends Component {
         event.preventDefault();
         console.log(this.state);
 
-        // post data to express server
+        // post data to express
         axios.post('http://localhost:4000/api/newquestion', this.state)
         .then(response => {
             console.log(response)
@@ -49,7 +50,7 @@ class QuestionForm extends Component {
             console.log(error)
         })
 
-        // post data to flask server
+        // post data to flask
         axios.post('http://localhost:5000/api/newquestion', this.state)
         .then(response => {
             console.log(response)
@@ -57,6 +58,9 @@ class QuestionForm extends Component {
         .catch(error => {
             console.log(error)
         })
+
+        // use history object to redirect
+        this.props.history.push('/questionresult');
     }
 
     handleChange = (event) => {
@@ -106,4 +110,4 @@ QuestionForm.propTypes = {
     classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(QuestionForm);
+export default withRouter(withStyles(styles)(QuestionForm));

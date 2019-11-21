@@ -1,16 +1,8 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 // Material UI
-import withStyles from '@material-ui/core/styles/withStyles';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
-
-const styles = {
-    button: {
-        marginTop: '90px'
-    }
-}
 
 class QuestionResult extends Component {
     constructor() {
@@ -20,32 +12,25 @@ class QuestionResult extends Component {
         }
     }
 
-    handleSubmit = (event) => {
-        event.preventDefault();
-        console.log(this.state);
-
-        // fetch data from python
+    componentDidMount() {
+        axios.post('http://localhost:5000/api/questionresult')
+        .then(response => {
+            this.setState({questionResult: response.data})
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
 
     render() {
-        const { classes } = this.props;
-
         return (
             <div>
                 <Container>
-                    <Grid align='center'>
-                        <Button
-                            className={classes.button}
-                            type="submit"
-                            variant="contained" 
-                            color="secondary">
-                                SEE THE ANSWER NOW!
-                        </Button>
-                    </Grid>
+                    <h1>{this.state.questionResult}</h1>
                 </Container>
             </div>
         )
     }
 }
 
-export default withStyles(styles)(QuestionResult);
+export default QuestionResult;

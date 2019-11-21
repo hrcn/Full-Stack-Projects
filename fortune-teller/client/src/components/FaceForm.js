@@ -41,8 +41,17 @@ class Form extends Component {
             headers: { "content-type": "multipart/form-data" }
         }
 
-        // post data to express server
+        // post data to express
         axios.post('http://localhost:4000/api/newface', fd, contentType)
+        .then(response => {
+            console.log(response)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+
+        // post data to flask
+        axios.post('http://localhost:5000/api/newface', fd, contentType)
         .then(response => {
             console.log(response)
         })
