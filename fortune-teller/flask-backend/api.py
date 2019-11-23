@@ -4,17 +4,16 @@ from flask_cors import CORS, cross_origin
 from test import hello, generate_text
 
 app = Flask(__name__)
-cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+cors = CORS(app)
 
-@app.route("/", methods=["GET"])
+@app.route("/", methods=['GET'])
 def home():
     return hello()
 
-@app.route("/api/newquestion", methods=['POST'])
+@app.route("/api/newquestion", methods=['GET','POST'])
 @cross_origin(origin='*',headers=['Content-Type'])
 def get_user_question():
     data = request.get_json()
-    print(data)
     question = data['question']
     result = generate_text(question)
     return jsonify(result) # jsonify() converts lists and dictionaries to JSON format
